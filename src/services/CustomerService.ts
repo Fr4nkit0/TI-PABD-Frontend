@@ -23,7 +23,7 @@ export async function fetchCustomers(
 }
 
 export async function createCustomer(customer: Customer): Promise<Customer> {
-  const res = await fetch(`${BASE_URL}/customers`, {
+  const res = await fetch(`${BASE_URL}/customers/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(customer),

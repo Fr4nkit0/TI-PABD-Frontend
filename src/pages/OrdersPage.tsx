@@ -15,6 +15,7 @@ export default function OrdersPage() {
 
   const loadData = () => {
     fetchOrders(page, 10, customer, employee).then((res) => setData(res));
+    
   };
 
   useEffect(() => {
