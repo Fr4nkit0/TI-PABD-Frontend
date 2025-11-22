@@ -5,9 +5,9 @@ export type Customer = {
   contacttitle: string;
   address: string;
   city: string;
-  region: string;
-  postalcode: string;
-  country: string;
-  phone: string;
-  fax: string;
+  region?: string | null;
+  postalcode?: string | null;
+  country?: string | null;
+  phone?: string | null;
+  fax?: string | null;
 };

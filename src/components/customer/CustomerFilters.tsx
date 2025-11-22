@@ -10,25 +10,39 @@ export default function CustomerFilters({
   const [text, setText] = useState("");
 
   return (
-    <div className="flex gap-4 mb-4">
+    <div
+      className="
+        flex flex-col gap-3 mb-4
+        sm:flex-row sm:items-center sm:gap-4
+      "
+    >
       <input
         type="text"
-        placeholder="Buscar cliente..."
+        placeholder="Buscar cliente por contacto..."
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="border px-3 py-2 rounded-lg w-80"
+        className="
+          border px-3 py-2 rounded-lg 
+          w-full sm:w-80
+        "
       />
 
       <button
         onClick={() => onSearch(text)}
-        className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+        className="
+          bg-blue-600 text-white px-4 py-2 rounded-lg
+          w-full sm:w-auto
+        "
       >
-        Buscar  
+        Buscar
       </button>
 
       <button
         onClick={onCreate}
-        className="bg-green-600 text-white px-4 py-2 rounded-lg"
+        className="
+          bg-green-600 text-white px-4 py-2 rounded-lg
+          w-full sm:w-auto
+        "
       >
         ➕ Crear Cliente
       </button>
