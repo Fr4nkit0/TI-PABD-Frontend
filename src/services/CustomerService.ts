@@ -90,7 +90,7 @@ export async function updateCustomer(customer: Customer): Promise<Customer> {
     try {
       const errorData = await res.json();
       errorMessage = errorData.message || errorData.error || errorData.detail || errorMessage;
-    } catch (e) {
+    } catch (e ) {
       // Mantener mensaje genérico si no se puede parsear
     }
 
@@ -98,4 +98,23 @@ export async function updateCustomer(customer: Customer): Promise<Customer> {
   }
 
   return res.json();
+}
+
+export async function deleteCustomer(customerid: string): Promise<void> {
+  const res = await fetch(`${BASE_URL}/customers/${customerid}/delete`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    let msg = "Error al eliminar el cliente";
+
+    try {
+      const err = await res.json();
+      msg = err.message || err.error || msg;
+    } catch {
+      console.error("No se pudo parsear el mensaje de error al eliminar el cliente");
+    }
+
+    throw new Error(msg);
+  }
 }

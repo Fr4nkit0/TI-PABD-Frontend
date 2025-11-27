@@ -38,16 +38,6 @@ export default function CustomerCreateModal({
   };
 
   const handleSave = () => {
-    // Campos requeridos
-    const requiredFields: (keyof Customer)[] = [
-      "customerid",
-      "companyname",
-      "contactname",
-      "contacttitle",
-      "address",
-      "city",
-    ];
-
     // Todos los campos del formulario
     const allFields: (keyof Customer)[] = [
       "customerid",
@@ -91,7 +81,7 @@ export default function CustomerCreateModal({
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden animate-in fade-in zoom-in duration-200">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 flex items-center justify-between">
+        <div className="bg-linear-to-r from-green-600 to-green-700 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="bg-white/20 p-2 rounded-lg">
               <Building2 className="w-6 h-6 text-white" />
@@ -112,7 +102,7 @@ export default function CustomerCreateModal({
           {/* Mensaje de error del backend */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="flex-shrink-0 mt-0.5">
+              <div className="shrink-0 mt-0.5">
                 <AlertCircle className="w-5 h-5 text-red-600" />
               </div>
               <div className="flex-1">
@@ -297,7 +287,7 @@ export default function CustomerCreateModal({
             </button>
             <button
               onClick={handleSave}
-              className="px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+              className="px-5 py-2.5 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors shadow-sm"
             >
               Guardar Cliente
             </button>

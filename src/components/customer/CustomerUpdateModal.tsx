@@ -47,16 +47,6 @@ export default function CustomerUpdateModal({
     };
 
     const handleUpdate = () => {
-        // Campos requeridos
-        const requiredFields: (keyof Customer)[] = [
-            "customerid",
-            "companyname",
-            "contactname",
-            "contacttitle",
-            "address",
-            "city",
-        ];
-
         // Todos los campos del formulario
         const allFields: (keyof Customer)[] = [
             "customerid",
@@ -100,7 +90,7 @@ export default function CustomerUpdateModal({
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden animate-in fade-in zoom-in duration-200">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4 flex items-center justify-between">
+                <div className="bg-linear-to-r from-green-600 to-green-700 px-6 py-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="bg-white/20 p-2 rounded-lg">
                             <Building2 className="w-6 h-6 text-white" />

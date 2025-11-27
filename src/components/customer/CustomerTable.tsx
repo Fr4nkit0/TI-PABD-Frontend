@@ -6,9 +6,11 @@ import CustomerUpdateModal from "./CustomerUpdateModal";
 export default function CustomerTable({
   customers,
   onUpdateCustomer,
+  onDeleteCustomer,
 }: {
   customers: Customer[];
   onUpdateCustomer: (customer: Customer) => void;
+  onDeleteCustomer: (customerid: string) => void;
 }) {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
@@ -91,6 +93,13 @@ export default function CustomerTable({
                       title="Editar cliente"
                     >
                       <Pencil className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => onDeleteCustomer(c.customerid)}
+                      className="text-red-600 hover:text-red-800 font-semibold ml-3"
+                      title="Eliminar cliente"
+                    >
+                      🗑️
                     </button>
                   </td>
                 </tr>

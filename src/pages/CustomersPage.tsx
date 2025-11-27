@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { fetchCustomers, createCustomer, updateCustomer } from "../services/CustomerService";
+import { fetchCustomers, createCustomer, updateCustomer, deleteCustomer } from "../services/CustomerService";
 import type { Customer, Paginated } from "../types";
 import CustomerTable from "../components/customer/CustomerTable";
 import Pagination from "../components/Pagination";
 import CustomerFilters from "../components/customer/CustomerFilters";
 import CustomerCreateModal from "../components/customer/CustomerCreateModal";
-
+import Swal from "sweetalert2";
 export default function CustomersPage() {
   const [data, setData] = useState<Paginated<Customer> | null>(null);
   const [page, setPage] = useState(1);
@@ -17,7 +17,7 @@ export default function CustomersPage() {
     fetchCustomers(page, 10, search).then(setData);
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     loadData();
   }, [page]);
 
@@ -34,8 +34,6 @@ export default function CustomersPage() {
 
       setOpenModal(false);
       loadData();
-
-      alert("✅ Cliente creado exitosamente");
     } catch (error: any) {
       setCreateError(error.message || "Error al crear el cliente");
     }
@@ -50,11 +48,33 @@ export default function CustomersPage() {
     try {
       await updateCustomer(updatedCustomer);
       loadData();
-      alert("✅ Cliente actualizado exitosamente");
     } catch (err: any) {
       alert(err.message || "Error al actualizar el cliente.");
     }
   };
+  const handleDeleteCustomer = async (customerid: string) => {
+    const result = await Swal.fire({
+      title: "¿Eliminar cliente?",
+      text: `Se eliminará el cliente con ID: ${customerid}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6"
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await deleteCustomer(customerid);
+      Swal.fire("Eliminado", "El cliente fue eliminado correctamente.", "success");
+      loadData();
+    } catch (err: any) {
+      Swal.fire("Error", err.message || "No se pudo eliminar el cliente.", "error");
+    }
+  };
+
 
   if (!data) return <p>Cargando...</p>;
 
@@ -78,6 +98,7 @@ export default function CustomersPage() {
         <CustomerTable
           customers={data.content}
           onUpdateCustomer={handleUpdateCustomer}
+          onDeleteCustomer={handleDeleteCustomer}
         />
       </div>
 
